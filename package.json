@@ -1,34 +1,21 @@
 {
   "name": "stm32-cmake-helper",
   "displayName": "STM32 CMake Helper",
-  "description": "Automates STM32 CMake setup",
+  "description": "Initialize STM32 CMake projects",
   "version": "0.0.1",
+  "publisher": "Onik1999",
   "engines": {
-    "vscode": "^1.70.0"
+    "vscode": "^1.80.0"
   },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onCommand:stm32.initProject"
-  ],
+  "activationEvents": ["stm32.initProject"],
+  "categories": ["Other"],
   "main": "./extension.js",
   "contributes": {
     "commands": [
       {
         "command": "stm32.initProject",
-        "title": "STM32: Initialize CMake Project"
+        "title": "STM32: Initialize Project"
       }
     ]
-  },
-  "scripts": {
-    "vscode:prepublish": "npx vsce package"
-  },
-  "devDependencies": {
-    "typescript": "^4.9.5",
-    "vsce": "^2.14.0"
-  },
-  "dependencies": {
-    "fast-xml-parser": "^5.3.7"
   }
 }
