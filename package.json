@@ -4,6 +4,7 @@
   "description": "Initialize STM32 CMake projects",
   "version": "0.0.1",
   "publisher": "Onik1999",
+  "repository": "https://github.com/Onik1999/STM32_helper_ext",
   "engines": {
     "vscode": "^1.80.0"
   },
