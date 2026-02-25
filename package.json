@@ -2,7 +2,7 @@
   "name": "stm32-cmake-helper",
   "displayName": "STM32 CMake Helper",
   "description": "Initialize STM32 CMake projects",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "Onik1999",
   "repository": "https://github.com/Onik1999/STM32_helper_ext",
   "engines": {
