@@ -73,8 +73,8 @@ function createTasksJson(rootPath) {
     const tasks = {
         version: "2.0.0",
         tasks: [
-            { label: "build-debug", type: "shell", command: "cmake", args: ["--build", "--preset", "Debug"] },
-            { label: "build-release", type: "shell", command: "cmake", args: ["--build", "--preset", "Release"] }
+            { label: "build-debug", type: "shell", command: "cmake", args: ["--build", "--preset", "Debug"], problemMatcher: ["$gcc"] },
+            { label: "build-release", type: "shell", command: "cmake", args: ["--build", "--preset", "Release"], problemMatcher: ["$gcc"] }
         ]
     };
 

@@ -8,6 +8,10 @@
   "engines": {
     "vscode": "^1.80.0"
   },
+  "extensionPack": [
+    "marus25.cortex-debug",
+    "llvm-vs-code-extensions.vscode-clangd"
+  ],
   "activationEvents": ["stm32.initProject"],
   "categories": ["Other"],
   "main": "./extension.js",
