@@ -2,6 +2,8 @@ const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 const { spawn } = require('child_process');
+const { execSync } = require("child_process");
+const os = require("os");
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -89,6 +91,7 @@ function createLaunchJson(rootPath) {
 	
     const elfName = detectProjectElfName(rootPath);
     const mcuName = detectOpenOcdTarget(rootPath);
+    const gdb = findGdb();
 
     const launch = {
         version: "0.2.0",
@@ -97,6 +100,7 @@ function createLaunchJson(rootPath) {
                 name: "STM32 Debug",
                 type: "cortex-debug",
                 request: "launch",
+                gdbPath: gdb,
                 servertype: "openocd",
                 executable: path.join("${workspaceFolder}", 'build', 'Debug', elfName),
                 cwd: "${workspaceFolder}",
@@ -111,6 +115,7 @@ function createLaunchJson(rootPath) {
                 name: "STM32 Release",
                 type: "cortex-debug",
                 request: "launch",
+                gdbPath: gdb,
                 servertype: "openocd",
                 executable: path.join("${workspaceFolder}", 'build', 'Release', elfName),
                 cwd: "${workspaceFolder}",
@@ -224,4 +229,36 @@ function detectOpenOcdTarget(rootPath) {
     };
 
     return familyMap[mcuFamily] || 'target/stm32f1x.cfg';
+}
+
+
+
+
+
+function findGdb() {
+    const isWindows = os.platform() === "win32";
+
+    const candidates = isWindows
+        ? ["arm-none-eabi-gdb.exe", "gdb-multiarch.exe"]
+        : ["arm-none-eabi-gdb", "gdb-multiarch"];
+
+    for (const cmd of candidates) {
+        try {
+            const result = execSync(
+                isWindows ? `where ${cmd}` : `which ${cmd}`,
+                { stdio: ["ignore", "pipe", "ignore"] }
+            )
+                .toString()
+                .split("\n")[0]
+                .trim();
+
+            if (result) {
+                return result;
+            }
+        } catch (e) {
+            // Not found, try next
+        }
+    }
+
+    return null;
 }
